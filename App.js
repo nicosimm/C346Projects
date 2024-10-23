@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react-native';
+import { ScrollView, Text, View, StatusBar, Image } from 'react-native';
+import Icon from "react-native-vector-icons/FontAwesome6";
 
-export default function App() {
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+        <ScrollView>
+            <StatusBar hidden={true}/>
+            <Movie
+                title="Doctor Sleep"
+                year="2019"
+                icon_name="baby"
+                poster={require('./img/doctor-sleep.jpg')}  // Pass the movie poster as a prop
+            />
+            <Movie
+                title="Midway"
+                year="2020"
+                icon_name="person-rifle"
+                poster={require('./img/midway.jpg')} // Path to the image
+            />
+        </ScrollView>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Movie= ({title, year, icon_name, poster}) => {
+  return (
+      <View>
+          <Image
+              source={poster}
+              style={{ width: 400, height: 500 }} // Setting width and height
+          />
+          <Icon name={icon_name} size={20}/>
+          <Text>{title} {year}</Text>
+      </View>
+  )
+}
+
+export default App;
